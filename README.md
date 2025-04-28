@@ -129,7 +129,7 @@ Let me define the architecture for the model of IR model here which is mostly si
 
 
 ```
-(B, C, D, H, W) = (1, 1, 15, 360, 516)
+(B, C, D, H, W) = (1, 1, 16, 360, 516)
 ```
 The data must be in the src/data/dataset folder inorder to work.
 ---
@@ -138,20 +138,20 @@ The data must be in the src/data/dataset folder inorder to work.
 
 | Step | Layer | Description | Output Shape |
 |------|-------|-------------|--------------|
-| Input | - | Original input | **(1, 1, 15, 360, 516)** |
-| 1 | Conv3d (stride=(1,1,2)) | Channels ↑ to 64, W ↓ | **(1, 64, 15, 360, 258)** |
-| 2 | GroupNorm | - | (1, 64, 15, 360, 258) |
-| 3 | Conv3d | 3x3 conv | (1, 64, 15, 360, 258) |
-| 4 | GroupNorm | - | (1, 64, 15, 360, 258) |
-| 5 | Conv3d | 3x3 conv | (1, 64, 15, 360, 258) |
-| 6 | SELU | - | (1, 64, 15, 360, 258) |
-| 7 | Conv3d (1,3,3) | Only H and W touched | (1, 64, 15, 360, 256) |
-| 8–10 | GroupNorm, Conv3d ×2 | Repeats | (1, 64, 15, 360, 256) |
-| 11 | SELU | - | (1, 64, 15, 360, 256) |
+| Input | - | Original input | **(1, 1, 16, 360, 516)** |
+| 1 | Conv3d (stride=(1,1,2)) | Channels ↑ to 64, W ↓ | **(1, 64, 16, 360, 258)** |
+| 2 | GroupNorm | - | (1, 64, 16, 360, 258) |
+| 3 | Conv3d | 3x3 conv | (1, 64, 16, 360, 258) |
+| 4 | GroupNorm | - | (1, 64, 16, 360, 258) |
+| 5 | Conv3d | 3x3 conv | (1, 64, 16, 360, 258) |
+| 6 | SELU | - | (1, 64, 16, 360, 258) |
+| 7 | Conv3d (1,3,3) | Only H and W touched | (1, 64, 16, 360, 256) |
+| 8–10 | GroupNorm, Conv3d ×2 | Repeats | (1, 64, 16, 360, 256) |
+| 11 | SELU | - | (1, 64, 16, 360, 256) |
 | 12 | Conv3d (stride=2) | Downsample all dims | **(1, 64, 8, 180, 128)** |
 | 13 | GroupNorm | - | (1, 64, 8, 180, 128) |
 | 14 | Conv3d | Refinement | (1, 64, 8, 180, 128) |
-| 15 | Conv3d (1,3,1) stride=(1,2,1) | Downsample H | **(1, 64, 8, 90, 128)** |
+| 16 | Conv3d (1,3,1) stride=(1,2,1) | Downsample H | **(1, 64, 8, 90, 128)** |
 | 16 | AdaptiveAvgPool3d → (4,80,128) | Force shape | **(1, 64, 4, 80, 128)** |
 | 17 | GroupNorm | - | (1, 64, 4, 80, 128) |
 | 18 | AdaptiveAvgPool3d → (2,64,64) | Final latent spatial | **(1, 64, 2, 64, 64)** |
@@ -177,15 +177,15 @@ The loss function has a additional parameter Beta which can be tweeked to increa
 | 8 | ConvTranspose3d (1,3,1) stride=(1,2,1) | Double H | **(1, 64, 4, 160, 128)** |
 | 9–13 | Conv3d, GN, SELU, etc | Smoothing | (1, 64, 4, 160, 128) |
 | 14 | ConvTranspose3d (kernel=3, stride=2) | Upsample all dims | **(1, 64, 8, 320, 256)** |
-| 15–17 | Conv3d, GN, SELU | Refinement | (1, 64, 8, 320, 256) |
+| 16–17 | Conv3d, GN, SELU | Refinement | (1, 64, 8, 320, 256) |
 | 18–20 | Conv3d x3 | Final tuning | (1, 64, 8, 320, 256) |
-| 21 | Upsample → (15, 360, 516) | Final upsample | **(1, 64, 15, 360, 516)** |
-| 22–23 | Conv3d, GN | Final conv layers | (1, 64, 15, 360, 516) |
-| 24–25 | SELU, Conv3d (→ 1 channel) | Output image | **(1, 1, 15, 360, 516)** |
+| 21 | Upsample → (16, 360, 516) | Final upsample | **(1, 64, 16, 360, 516)** |
+| 22–23 | Conv3d, GN | Final conv layers | (1, 64, 16, 360, 516) |
+| 24–25 | SELU, Conv3d (→ 1 channel) | Output image | **(1, 1, 16, 360, 516)** |
 
 ---
 
-✅ **Final output shape matches input: (1, 1, 15, 360, 516)**
+✅ **Final output shape matches input: (1, 1, 16, 360, 516)**
 
 
 
