@@ -28,6 +28,7 @@ The structure of each folder is as follows:
 |___train.py
 |___visualization.py
 |___live_loss.py
+|___Log_loss_vs_Log_epoch.py
 |___result_visualizer.ipynb
 
 ```
@@ -57,7 +58,8 @@ Here’s a polished bullet-point version of your features section with improved 
   - Preserves epoch count and learning rate scheduling.  
 
 - **📊 Visualization Tools**  
-  - Side-by-side original/reconstructed slices (GIF/PNG).  
+  - Side-by-side original/reconstructed slices (GIF/PNG).
+  - Checkout the visualization results. [IMERG_RESULTS](https://colab.research.google.com/drive/1wmiMRlo5-eLa7t516oxkkEEu14eY2Gy8?usp=sharing) [IR_RESULTS](https://colab.research.google.com/drive/1s1eFAK3M8VcaryZodOcwalQkKV0pUvBK?usp=sharing)
   
 ---
 
@@ -186,6 +188,11 @@ The loss function has a additional parameter Beta which can be tweeked to increa
 ---
 
 ✅ **Final output shape matches input: (1, 1, 16, 360, 516)**
+
+
+The same architecture goes for the IMERG data just the time steps changes to 12 instead of 16!!.
+
+
 
 
 
