@@ -192,6 +192,10 @@ The loss function has a additional parameter Beta which can be tweeked to increa
 
 The same architecture goes for the IMERG data just the time steps changes to 12 instead of 16!!.
 
+This is the image of how result looks like!!
+<img width="1075" alt="Screenshot 2025-04-30 at 12 26 14 AM" src="https://github.com/user-attachments/assets/139971b4-be6b-4355-97f1-3e6fca327b9c" />
+
+
 
 
 
