@@ -194,10 +194,13 @@ The same architecture goes for the IMERG data just the time steps changes to 12 
 
 This is the image of how result looks like!!
 <img width="1075" alt="Screenshot 2025-04-30 at 12 26 14 AM" src="https://github.com/user-attachments/assets/139971b4-be6b-4355-97f1-3e6fca327b9c" />
+<img width="1066" alt="ir" src="https://github.com/user-attachments/assets/be5efd84-95a0-4d29-aa81-556bd5c624ca" />
+
+The Training Reconstruction loss(with kl_divergence) is 0.00328 and the Validation loss(0.00321) for the IMERG Data.
+Currently experiments are going on the the final tunning for the IR Data!!
 
 
 
 
 
 
-No need to worry about trial_1,trial2,trial3 they are just raw code or the base code.
